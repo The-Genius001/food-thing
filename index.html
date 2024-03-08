@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <style>
+        body{
+            align-items: center;
+        }
+        button{
+            margin-top:5px;
+        }
+
+        </style>
+    </head>
+    <body>
+        <button onclick="func()">Enter</button>
+
+        <p id="demo"></p>
+        
+        <script>
+        function func() {
+          document.getElementById("s").innerHTML = "Sugar: "+sugar+"g";
+            document.getElementById("f").innerHTM = "Fat: "+fat+"g";
+            document.getElementById("f").innerHTML = "Carbohydrates: "+carbohydrates+"g";
+            console.log("hi");
+        }
+        </script>
+        
+        <div>
+            
+            <div>
+                <h1 id="s">sugar</h1>
+                <input
+        type="text"
+        placeholder="sugar"
+        class="input page-textinput"
+      />
+            </div><div>
+                <h1 id="f">fat</h1>
+                <input
+        type="text"
+        placeholder="fat"
+        class="input page-textinput"
+      />
+            </div>
+            <div>
+                <h1 id="c">carbohydrates</h1>
+                <input
+        type="text"
+        placeholder="carbohydrates"
+        class="input page-textinput"
+      />
+            </div>
+            <button onclick="hello()">
+                enter
+            </button >
+          </div>
+          
+          
+        <script>
+            
+            //document.getElementById("AA1").innerHTML = window.location.search.slice(1);
+            const url = 'https://world.openfoodfacts.org/api/v2/product/'+window.location.search.slice(1)+'.json';
+            console.log(url);
+            //const apiKey = 'YOUR_API_KEY';//dont have one so we dont need this
+
+            fetch(url, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0', //idk, not changeing this header for every browser.
+            },
+              })
+          .then((response) => response.json())
+         .then((data) => {
+            console.log(data.product.nutriments);
+             //cal=";"
+             proteins=data.product.nutriments.proteins;
+            sugar=data.product.nutriments.sugars;
+            fat=data.product.nutriments.fat;
+            carbohydrates=data.product.nutriments.carbohydrates;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        
+        function hello() {
+            document.getElementById(s).innerHTML = "Sugar: "+sugar+"g";
+            document.getElementById(f).innerHTM = "Fat: "+fat+"g";
+            document.getElementById(f).innerHTML = "Carbohydrates: "+carbohydrates+"g";
+            console.log("hi");
+        }
+        </script>
+    </body>
+</html>
